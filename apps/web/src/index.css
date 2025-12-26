@@ -1,61 +1,61 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(0 0% 98%);
+  --color-foreground: hsl(222 47% 11%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(222 47% 11%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(222 47% 11%);
+  --color-primary: hsl(217 91% 60%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(214 32% 91%);
+  --color-secondary-foreground: hsl(222 47% 11%);
+  --color-muted: hsl(210 40% 96%);
+  --color-muted-foreground: hsl(215 16% 47%);
+  --color-accent: hsl(210 40% 96%);
+  --color-accent-foreground: hsl(222 47% 11%);
+  --color-destructive: hsl(0 72% 51%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-border: hsl(214 32% 88%);
+  --color-input: hsl(214 32% 88%);
+  --color-ring: hsl(217 91% 60%);
+
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+}
 
 @layer base {
-  :root {
-    /* Soft, sophisticated professional theme */
-    --background: 0 0% 98%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 214 32% 91%;
-    --secondary-foreground: 222 47% 11%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222 47% 11%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 214 32% 88%;
-    --input: 214 32% 88%;
-    --ring: 217 91% 60%;
-    --radius: 0.5rem;
-  }
-
   .dark {
-    /* Sophisticated dark mode with proper contrast */
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
-    --card: 224 71% 6%;
-    --card-foreground: 213 31% 91%;
-    --popover: 224 71% 6%;
-    --popover-foreground: 213 31% 91%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 222 47% 11%;
-    --secondary-foreground: 213 31% 91%;
-    --muted: 223 47% 11%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 216 34% 17%;
-    --accent-foreground: 213 31% 91%;
-    --destructive: 0 63% 51%;
-    --destructive-foreground: 213 31% 91%;
-    --border: 216 34% 17%;
-    --input: 216 34% 17%;
-    --ring: 217 91% 60%;
+    --color-background: hsl(224 71% 4%);
+    --color-foreground: hsl(213 31% 91%);
+    --color-card: hsl(224 71% 6%);
+    --color-card-foreground: hsl(213 31% 91%);
+    --color-popover: hsl(224 71% 6%);
+    --color-popover-foreground: hsl(213 31% 91%);
+    --color-primary: hsl(217 91% 60%);
+    --color-primary-foreground: hsl(0 0% 100%);
+    --color-secondary: hsl(222 47% 11%);
+    --color-secondary-foreground: hsl(213 31% 91%);
+    --color-muted: hsl(223 47% 11%);
+    --color-muted-foreground: hsl(215 20% 65%);
+    --color-accent: hsl(216 34% 17%);
+    --color-accent-foreground: hsl(213 31% 91%);
+    --color-destructive: hsl(0 63% 51%);
+    --color-destructive-foreground: hsl(213 31% 91%);
+    --color-border: hsl(216 34% 17%);
+    --color-input: hsl(216 34% 17%);
+    --color-ring: hsl(217 91% 60%);
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: var(--color-border);
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
 }
