@@ -1,0 +1,76 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: scaffold-mono-db-e2e
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: e2e_test
+      POSTGRES_USER: e2e_user
+      POSTGRES_PASSWORD: e2e_password
+    ports:
+      - "5433:5432" # Different port to avoid conflict with local dev
+    volumes:
+      - postgres_e2e_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U e2e_user"]
+      interval: 2s
+      timeout: 1s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: scaffold-mono-redis-e2e
+    restart: unless-stopped
+    ports:
+      - "6380:6379" # Different port to avoid conflict with local dev
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: scaffold-mono-api-e2e
+    restart: unless-stopped
+    ports:
+      - "8001:8000" # Different port
+    environment:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://e2e_user:e2e_password@postgres:5432/e2e_test
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: e2e-test-secret-change-in-production
+      JWT_REFRESH_SECRET: e2e-test-refresh-secret
+      PORT: 8000
+      CORS_ORIGIN: http://localhost:3001
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: sh -c "pnpm migration:run && pnpm start"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8000/health"]
+      interval: 3s
+      timeout: 2s
+      retries: 15
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    container_name: scaffold-mono-web-e2e
+    restart: unless-stopped
+    ports:
+      - "3001:3000" # Different port
+    environment:
+      VITE_API_BASE_URL: http://localhost:8001
+      VITE_API_VERSION: v1
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  postgres_e2e_data:

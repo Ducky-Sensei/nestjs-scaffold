@@ -1,0 +1,88 @@
+# Manual Build Workflow - Can be triggered manually to build the entire monorepo
+# Useful for testing or creating release artifacts
+name: Manual Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      upload-artifacts:
+        description: "Upload build artifacts"
+        required: false
+        type: boolean
+        default: true
+      run-tests:
+        description: "Run tests before building"
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  build-monorepo:
+    name: Build Entire Monorepo
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run linting
+        run: pnpm lint
+
+      - name: Run type checking
+        run: pnpm type-check
+
+      - name: Run tests
+        if: ${{ inputs.run-tests }}
+        run: pnpm test
+
+      - name: Build all apps
+        run: pnpm build
+
+      - name: Upload API artifacts
+        if: ${{ inputs.upload-artifacts }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-dist
+          path: apps/api/dist/
+          retention-days: 7
+
+      - name: Upload Web artifacts
+        if: ${{ inputs.upload-artifacts }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: apps/web/dist/
+          retention-days: 7
+
+      - name: Build summary
+        run: |
+          echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Build completed successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "- API: \`apps/api/dist/\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Web: \`apps/web/dist/\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -d "apps/api/dist" ]; then
+            API_SIZE=$(du -sh apps/api/dist | cut -f1)
+            echo "- API build size: $API_SIZE" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ -d "apps/web/dist" ]; then
+            WEB_SIZE=$(du -sh apps/web/dist | cut -f1)
+            echo "- Web build size: $WEB_SIZE" >> $GITHUB_STEP_SUMMARY
+          fi

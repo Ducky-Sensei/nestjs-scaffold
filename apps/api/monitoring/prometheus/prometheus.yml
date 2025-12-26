@@ -1,0 +1,50 @@
+# Prometheus Configuration
+# This file configures Prometheus to scrape metrics from your application
+
+global:
+  # How frequently to scrape targets by default
+  scrape_interval: 15s
+  # How long until a scrape request times out
+  scrape_timeout: 10s
+  # How frequently to evaluate rules
+  evaluation_interval: 15s
+
+# Alertmanager configuration (optional)
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets: ['alertmanager:9093']
+
+# Load rules once and periodically evaluate them
+# rule_files:
+#   - "alerts/*.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Your NestJS application
+  - job_name: 'scaffold-service'
+    # Override global scrape interval for this job
+    scrape_interval: 10s
+    scrape_timeout: 5s
+    # Note: Metrics are versioned at /v1/metrics due to API versioning
+    metrics_path: '/v1/metrics'
+    static_configs:
+      # Dev server runs on port 8000, production on 3000
+      - targets: ['host.docker.internal:8000']
+        labels:
+          service: 'scaffold-service'
+          environment: 'development'
+
+  # Add additional services here
+  # - job_name: 'postgres-exporter'
+  #   static_configs:
+  #     - targets: ['postgres-exporter:9187']
+
+  # - job_name: 'node-exporter'
+  #   static_configs:
+  #     - targets: ['node-exporter:9100']

@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.48.1
+    container_name: scaffold-prometheus
+    restart: unless-stopped
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+      - '--storage.tsdb.retention.time=30d'
+    networks:
+      - monitoring
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+  grafana:
+    image: grafana/grafana:10.2.3
+    container_name: scaffold-grafana
+    restart: unless-stopped
+    ports:
+      - '3001:3000'
+    environment:
+      # Default admin credentials (change in production!)
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      # Disable telemetry
+      - GF_ANALYTICS_REPORTING_ENABLED=false
+      - GF_ANALYTICS_CHECK_FOR_UPDATES=false
+      # Enable anonymous access for development
+      - GF_AUTH_ANONYMOUS_ENABLED=false
+      # Server settings
+      - GF_SERVER_ROOT_URL=http://localhost:3001
+      # Paths
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    networks:
+      - monitoring
+    depends_on:
+      - prometheus
+
+  # Optional: Node Exporter for system metrics
+  # Uncomment to enable
+  # node-exporter:
+  #   image: prom/node-exporter:v1.7.0
+  #   container_name: scaffold-node-exporter
+  #   restart: unless-stopped
+  #   ports:
+  #     - '9100:9100'
+  #   command:
+  #     - '--path.procfs=/host/proc'
+  #     - '--path.sysfs=/host/sys'
+  #     - '--path.rootfs=/rootfs'
+  #     - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+  #   volumes:
+  #     - /proc:/host/proc:ro
+  #     - /sys:/host/sys:ro
+  #     - /:/rootfs:ro
+  #   networks:
+  #     - monitoring
+
+networks:
+  monitoring:
+    name: scaffold-monitoring
+    driver: bridge
+
+volumes:
+  prometheus-data:
+    name: scaffold-prometheus-data
+  grafana-data:
+    name: scaffold-grafana-data

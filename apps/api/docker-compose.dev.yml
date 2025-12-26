@@ -1,0 +1,84 @@
+services:
+    db:
+        image: postgres:17-alpine
+        container_name: scaffold_db_dev
+        restart: unless-stopped
+        environment:
+            POSTGRES_USER: test
+            POSTGRES_PASSWORD: test
+            POSTGRES_DB: test
+        ports:
+            - "1530:5432"
+        volumes:
+            - scaffold_dev_pg_data:/var/lib/postgresql/data
+        healthcheck:
+            test: ["CMD", "pg_isready", "-U", "test"]
+            interval: 5s
+            timeout: 3s
+            retries: 5
+        networks:
+            - web
+
+    redis:
+        image: redis:7-alpine
+        container_name: scaffold_redis_dev
+        restart: unless-stopped
+        ports:
+            - "6379:6379"
+        volumes:
+            - scaffold_dev_redis_data:/data
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 5s
+            timeout: 3s
+            retries: 5
+        networks:
+            - web
+
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        container_name: scaffold_app_dev
+        restart: unless-stopped
+        environment:
+            NODE_ENV: development
+            SEED_DATABASE: 'true'
+            # Database configuration
+            DATABASE_HOST: db
+            DATABASE_PORT: 5432
+            DATABASE_USER: test
+            DATABASE_PASSWORD: test
+            DATABASE_NAME: test
+            # Cache configuration (optional - comment out to disable Redis)
+            CACHE_ENABLED: 'true'
+            CACHE_TYPE: redis
+            REDIS_HOST: redis
+            REDIS_PORT: 6379
+            CACHE_TTL: 300
+        ports:
+            - '8000:8000'
+        volumes:
+            # Mount source code for hot reload
+            - ./src:/app/src
+            - ./dev:/app/dev
+            - ./test:/app/test
+            - ./scripts:/app/scripts
+            - ./nodemon.json:/app/nodemon.json
+            # Exclude node_modules from sync
+            - /app/node_modules
+        depends_on:
+            db:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+        networks:
+            - web
+
+volumes:
+    scaffold_dev_pg_data:
+    scaffold_dev_redis_data:
+
+networks:
+    web:
+        external: true

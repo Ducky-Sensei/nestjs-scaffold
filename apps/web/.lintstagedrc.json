@@ -1,0 +1,5 @@
+{
+  "*.{ts,tsx,js,jsx}": [
+    "bash -c 'files=\"$@\"; echo \"$files\" | tr \" \" \"\\n\" | grep -v \"routeTree.gen.ts\" | grep -v \"\\.gen\\.ts$\" | xargs -r biome check --write --no-errors-on-unmatched --files-ignore-unknown=true' --"
+  ]
+}

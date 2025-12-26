@@ -1,0 +1,123 @@
+# Dependencies (will be installed in container)
+node_modules
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output (will be generated in container)
+dist
+build
+*.tsbuildinfo
+.turbo
+
+# Testing
+coverage
+.nyc_output
+*.test.ts
+*.spec.ts
+test
+tests
+__tests__
+jest.config.js
+jest.config.ts
+
+# Development files
+.dev-container-info.json
+.nodemon-restart
+dev
+*.dev.ts
+main-dev.ts
+
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+.circleci
+.husky
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+docs
+*.md
+!package.json
+
+# Docker files
+docker-compose.yml
+docker-compose.*.yml
+Dockerfile*
+.dockerignore
+
+# Environment files (use docker secrets/env vars instead)
+.env
+.env.*
+!.env.example
+
+# Editor and IDE
+.vscode
+.idea
+.project
+.classpath
+.settings
+*.sublime-workspace
+*.sublime-project
+.editorconfig
+.prettierrc
+.prettierignore
+.eslintrc.js
+.eslintignore
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# Logs
+logs
+*.log
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary files
+.temp
+.tmp
+*.swp
+*.swo
+*.bak
+*.cache
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+postgres-data
+docker-volumes
+*.sql
+*.sql.gz
+
+# Misc
+.vercel
+.claude
+.claude/
+*.pem

@@ -1,0 +1,267 @@
+import type { Theme } from '@/types/theme';
+
+/**
+ * Example theme: Blue Corporate
+ */
+export const BLUE_CORPORATE_THEME: Theme = {
+  id: 'blue-corporate',
+  name: 'Blue Corporate',
+  light: {
+    background: '0 0% 100%',
+    foreground: '222 47% 11%',
+    card: '0 0% 100%',
+    cardForeground: '222 47% 11%',
+    popover: '0 0% 100%',
+    popoverForeground: '222 47% 11%',
+    primary: '221 83% 53%', // Bright blue
+    primaryForeground: '0 0% 100%',
+    secondary: '210 40% 96%',
+    secondaryForeground: '222 47% 11%',
+    muted: '210 40% 96%',
+    mutedForeground: '215 16% 47%',
+    accent: '210 40% 96%',
+    accentForeground: '222 47% 11%',
+    destructive: '0 84% 60%',
+    destructiveForeground: '0 0% 98%',
+    border: '214 32% 91%',
+    input: '214 32% 91%',
+    ring: '221 83% 53%',
+  },
+  dark: {
+    background: '222 47% 11%',
+    foreground: '210 40% 98%',
+    card: '222 47% 11%',
+    cardForeground: '210 40% 98%',
+    popover: '222 47% 11%',
+    popoverForeground: '210 40% 98%',
+    primary: '221 83% 53%',
+    primaryForeground: '0 0% 100%',
+    secondary: '217 33% 17%',
+    secondaryForeground: '210 40% 98%',
+    muted: '217 33% 17%',
+    mutedForeground: '215 20% 65%',
+    accent: '217 33% 17%',
+    accentForeground: '210 40% 98%',
+    destructive: '0 63% 31%',
+    destructiveForeground: '210 40% 98%',
+    border: '217 33% 17%',
+    input: '217 33% 17%',
+    ring: '221 83% 53%',
+  },
+  radius: '0.5rem',
+};
+
+/**
+ * Example theme: Green Tech
+ */
+export const GREEN_TECH_THEME: Theme = {
+  id: 'green-tech',
+  name: 'Green Tech',
+  light: {
+    background: '0 0% 100%',
+    foreground: '240 10% 4%',
+    card: '0 0% 100%',
+    cardForeground: '240 10% 4%',
+    popover: '0 0% 100%',
+    popoverForeground: '240 10% 4%',
+    primary: '142 76% 36%', // Green
+    primaryForeground: '0 0% 100%',
+    secondary: '140 40% 96%',
+    secondaryForeground: '240 10% 4%',
+    muted: '140 40% 96%',
+    mutedForeground: '240 5% 46%',
+    accent: '140 40% 96%',
+    accentForeground: '240 10% 4%',
+    destructive: '0 84% 60%',
+    destructiveForeground: '0 0% 98%',
+    border: '140 30% 91%',
+    input: '140 30% 91%',
+    ring: '142 76% 36%',
+  },
+  dark: {
+    background: '240 10% 4%',
+    foreground: '0 0% 98%',
+    card: '240 10% 4%',
+    cardForeground: '0 0% 98%',
+    popover: '240 10% 4%',
+    popoverForeground: '0 0% 98%',
+    primary: '142 76% 36%',
+    primaryForeground: '0 0% 100%',
+    secondary: '240 5% 17%',
+    secondaryForeground: '0 0% 98%',
+    muted: '240 5% 17%',
+    mutedForeground: '240 5% 65%',
+    accent: '240 5% 17%',
+    accentForeground: '0 0% 98%',
+    destructive: '0 63% 31%',
+    destructiveForeground: '0 0% 98%',
+    border: '240 5% 17%',
+    input: '240 5% 17%',
+    ring: '142 76% 36%',
+  },
+  radius: '0.5rem',
+};
+
+/**
+ * Example theme: Purple Premium
+ */
+export const PURPLE_PREMIUM_THEME: Theme = {
+  id: 'purple-premium',
+  name: 'Purple Premium',
+  light: {
+    background: '0 0% 100%',
+    foreground: '240 10% 4%',
+    card: '0 0% 100%',
+    cardForeground: '240 10% 4%',
+    popover: '0 0% 100%',
+    popoverForeground: '240 10% 4%',
+    primary: '262 83% 58%', // Purple
+    primaryForeground: '0 0% 100%',
+    secondary: '270 40% 96%',
+    secondaryForeground: '240 10% 4%',
+    muted: '270 40% 96%',
+    mutedForeground: '240 5% 46%',
+    accent: '270 40% 96%',
+    accentForeground: '240 10% 4%',
+    destructive: '0 84% 60%',
+    destructiveForeground: '0 0% 98%',
+    border: '270 30% 91%',
+    input: '270 30% 91%',
+    ring: '262 83% 58%',
+  },
+  dark: {
+    background: '240 10% 4%',
+    foreground: '0 0% 98%',
+    card: '240 10% 4%',
+    cardForeground: '0 0% 98%',
+    popover: '240 10% 4%',
+    popoverForeground: '0 0% 98%',
+    primary: '262 83% 58%',
+    primaryForeground: '0 0% 100%',
+    secondary: '240 5% 17%',
+    secondaryForeground: '0 0% 98%',
+    muted: '240 5% 17%',
+    mutedForeground: '240 5% 65%',
+    accent: '240 5% 17%',
+    accentForeground: '0 0% 98%',
+    destructive: '0 63% 31%',
+    destructiveForeground: '0 0% 98%',
+    border: '240 5% 17%',
+    input: '240 5% 17%',
+    ring: '262 83% 58%',
+  },
+  radius: '0.75rem',
+};
+
+/**
+ * Example theme: Orange Energy
+ */
+export const ORANGE_ENERGY_THEME: Theme = {
+  id: 'orange-energy',
+  name: 'Orange Energy',
+  light: {
+    background: '0 0% 100%',
+    foreground: '20 14% 4%',
+    card: '0 0% 100%',
+    cardForeground: '20 14% 4%',
+    popover: '0 0% 100%',
+    popoverForeground: '20 14% 4%',
+    primary: '25 95% 53%', // Orange
+    primaryForeground: '0 0% 100%',
+    secondary: '33 100% 96%',
+    secondaryForeground: '20 14% 4%',
+    muted: '33 100% 96%',
+    mutedForeground: '20 7% 46%',
+    accent: '33 100% 96%',
+    accentForeground: '20 14% 4%',
+    destructive: '0 84% 60%',
+    destructiveForeground: '0 0% 98%',
+    border: '33 50% 91%',
+    input: '33 50% 91%',
+    ring: '25 95% 53%',
+  },
+  dark: {
+    background: '20 14% 4%',
+    foreground: '0 0% 98%',
+    card: '20 14% 4%',
+    cardForeground: '0 0% 98%',
+    popover: '20 14% 4%',
+    popoverForeground: '0 0% 98%',
+    primary: '25 95% 53%',
+    primaryForeground: '0 0% 100%',
+    secondary: '20 7% 17%',
+    secondaryForeground: '0 0% 98%',
+    muted: '20 7% 17%',
+    mutedForeground: '20 7% 65%',
+    accent: '20 7% 17%',
+    accentForeground: '0 0% 98%',
+    destructive: '0 63% 31%',
+    destructiveForeground: '0 0% 98%',
+    border: '20 7% 17%',
+    input: '20 7% 17%',
+    ring: '25 95% 53%',
+  },
+  radius: '0.5rem',
+};
+
+/**
+ * Example theme: Red Brand
+ */
+export const RED_BRAND_THEME: Theme = {
+  id: 'red-brand',
+  name: 'Red Brand',
+  light: {
+    background: '0 0% 100%',
+    foreground: '0 0% 4%',
+    card: '0 0% 100%',
+    cardForeground: '0 0% 4%',
+    popover: '0 0% 100%',
+    popoverForeground: '0 0% 4%',
+    primary: '0 84% 60%', // Red
+    primaryForeground: '0 0% 100%',
+    secondary: '0 40% 96%',
+    secondaryForeground: '0 0% 4%',
+    muted: '0 40% 96%',
+    mutedForeground: '0 0% 46%',
+    accent: '0 40% 96%',
+    accentForeground: '0 0% 4%',
+    destructive: '0 84% 60%',
+    destructiveForeground: '0 0% 98%',
+    border: '0 30% 91%',
+    input: '0 30% 91%',
+    ring: '0 84% 60%',
+  },
+  dark: {
+    background: '0 0% 4%',
+    foreground: '0 0% 98%',
+    card: '0 0% 4%',
+    cardForeground: '0 0% 98%',
+    popover: '0 0% 4%',
+    popoverForeground: '0 0% 98%',
+    primary: '0 84% 60%',
+    primaryForeground: '0 0% 100%',
+    secondary: '0 0% 17%',
+    secondaryForeground: '0 0% 98%',
+    muted: '0 0% 17%',
+    mutedForeground: '0 0% 65%',
+    accent: '0 0% 17%',
+    accentForeground: '0 0% 98%',
+    destructive: '0 63% 31%',
+    destructiveForeground: '0 0% 98%',
+    border: '0 0% 17%',
+    input: '0 0% 17%',
+    ring: '0 84% 60%',
+  },
+  radius: '0.5rem',
+};
+
+/**
+ * All example themes
+ */
+export const EXAMPLE_THEMES = {
+  BLUE_CORPORATE: BLUE_CORPORATE_THEME,
+  GREEN_TECH: GREEN_TECH_THEME,
+  PURPLE_PREMIUM: PURPLE_PREMIUM_THEME,
+  ORANGE_ENERGY: ORANGE_ENERGY_THEME,
+  RED_BRAND: RED_BRAND_THEME,
+} as const;

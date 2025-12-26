@@ -1,0 +1,21 @@
+FROM node:22-alpine
+
+# Install pnpm
+RUN corepack enable pnpm
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install all dependencies (including dev)
+RUN pnpm install --frozen-lockfile
+
+# Copy source code (volumes will override in docker-compose)
+COPY . .
+
+# Expose application port
+EXPOSE 8000
+
+# Start development server with nodemon (no testcontainers in Docker)
+CMD ["pnpm", "start:dev:docker"]

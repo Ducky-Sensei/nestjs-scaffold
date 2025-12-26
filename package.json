@@ -1,0 +1,39 @@
+{
+  "name": "scaffold-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Full-stack monorepo with NestJS backend and React frontend",
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,magenta \"pnpm --filter @scaffold/api dev\" \"pnpm --filter @scaffold/web dev\"",
+    "dev:api": "pnpm --filter @scaffold/api start:dev",
+    "dev:web": "pnpm --filter @scaffold/web dev",
+    "build": "pnpm --filter @scaffold/types type-check && pnpm --filter @scaffold/api build && pnpm --filter @scaffold/web build",
+    "build:api": "pnpm --filter @scaffold/api build",
+    "build:web": "pnpm --filter @scaffold/web build",
+    "test": "pnpm --filter @scaffold/api test && pnpm --filter @scaffold/web test",
+    "test:api": "pnpm --filter @scaffold/api test",
+    "test:web": "pnpm --filter @scaffold/web test",
+    "test:e2e": "pnpm run test:e2e:setup && pnpm --filter @scaffold/web test:e2e",
+    "test:e2e:setup": "docker compose up -d && pnpm run wait-for-services",
+    "test:e2e:teardown": "docker compose down -v",
+    "wait-for-services": "wait-on http://localhost:8001/health http://localhost:3001 -t 60000",
+    "lint": "pnpm --filter @scaffold/api lint:check && pnpm --filter @scaffold/web lint",
+    "lint:fix": "pnpm --filter @scaffold/api lint && pnpm --filter @scaffold/web lint:fix",
+    "type-check": "pnpm --recursive type-check",
+    "migration:generate": "pnpm --filter @scaffold/api migration:generate",
+    "migration:run": "pnpm --filter @scaffold/api migration:run",
+    "migration:revert": "pnpm --filter @scaffold/api migration:revert",
+    "db:seed": "pnpm --filter @scaffold/api db:seed",
+    "clean": "pnpm --recursive clean && rm -rf node_modules",
+    "clean:install": "pnpm clean && pnpm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "wait-on": "^9.0.3"
+  },
+  "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.0.0"
+  }
+}
