@@ -1,4 +1,5 @@
 # Multi-stage production Dockerfile for React app
+# Build context should be the monorepo root
 
 # Stage 1: Build
 FROM node:22-alpine AS builder
@@ -8,17 +9,19 @@ RUN corepack enable && corepack prepare pnpm@10.14.0 --activate
 
 WORKDIR /app
 
-# Copy package files
-COPY package.json pnpm-lock.yaml ./
+# Copy workspace configuration and package files
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages ./packages
+COPY apps/web/package.json ./apps/web/
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --filter @scaffold/web...
 
-# Copy source code
-COPY . .
+# Copy web source code
+COPY apps/web ./apps/web
 
 # Build application
-RUN pnpm run build
+RUN pnpm --filter @scaffold/web build
 
 # Stage 2: Production
 FROM nginx:alpine AS production
@@ -27,10 +30,10 @@ FROM nginx:alpine AS production
 RUN apk add --no-cache curl
 
 # Copy built assets from builder
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/apps/web/dist /usr/share/nginx/html
 
 # Copy nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY apps/web/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \

@@ -39,6 +39,7 @@ services:
       - "8001:8000" # Different port
     environment:
       NODE_ENV: test
+      NODE_PATH: /opt/app/node_modules:/opt/app/apps/api/node_modules
       DATABASE_URL: postgresql://e2e_user:e2e_password@postgres:5432/e2e_test
       REDIS_URL: redis://redis:6379
       JWT_SECRET: e2e-test-secret-change-in-production
@@ -50,7 +51,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-    command: sh -c "pnpm migration:run && pnpm start"
+    command: sh -c "node dist/src/main.js"
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:8000/health"]
       interval: 3s
