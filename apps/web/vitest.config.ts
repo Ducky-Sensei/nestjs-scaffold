@@ -16,6 +16,7 @@ export default defineConfig({
       exclude: [
         'node_modules',
         'src/__tests__',
+        'src/__mocks__/**',
         'src/**/*.{test,spec}.{ts,tsx}',
         'src/**/*.stories.{ts,tsx}',
         'src/vite-env.d.ts',
