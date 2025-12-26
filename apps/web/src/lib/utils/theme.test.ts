@@ -217,7 +217,9 @@ describe('theme utilities', () => {
       applyThemeColors(mockColors, 'light');
 
       expect(document.documentElement.classList.contains('dark')).toBe(false);
-      expect(document.documentElement.style.getPropertyValue('--background')).toBe(mockColors.background);
+      expect(document.documentElement.style.getPropertyValue('--background')).toBe(
+        mockColors.background,
+      );
       expect(document.documentElement.style.getPropertyValue('--primary')).toBe(mockColors.primary);
     });
 
@@ -225,25 +227,45 @@ describe('theme utilities', () => {
       applyThemeColors(mockColors, 'dark');
 
       expect(document.documentElement.classList.contains('dark')).toBe(true);
-      expect(document.documentElement.style.getPropertyValue('--background')).toBe(mockColors.background);
-      expect(document.documentElement.style.getPropertyValue('--foreground')).toBe(mockColors.foreground);
+      expect(document.documentElement.style.getPropertyValue('--background')).toBe(
+        mockColors.background,
+      );
+      expect(document.documentElement.style.getPropertyValue('--foreground')).toBe(
+        mockColors.foreground,
+      );
     });
 
     it('should apply all CSS variables correctly', () => {
       applyThemeColors(mockColors, 'light');
 
       expect(document.documentElement.style.getPropertyValue('--card')).toBe(mockColors.card);
-      expect(document.documentElement.style.getPropertyValue('--card-foreground')).toBe(mockColors.cardForeground);
+      expect(document.documentElement.style.getPropertyValue('--card-foreground')).toBe(
+        mockColors.cardForeground,
+      );
       expect(document.documentElement.style.getPropertyValue('--popover')).toBe(mockColors.popover);
-      expect(document.documentElement.style.getPropertyValue('--popover-foreground')).toBe(mockColors.popoverForeground);
-      expect(document.documentElement.style.getPropertyValue('--secondary')).toBe(mockColors.secondary);
-      expect(document.documentElement.style.getPropertyValue('--secondary-foreground')).toBe(mockColors.secondaryForeground);
+      expect(document.documentElement.style.getPropertyValue('--popover-foreground')).toBe(
+        mockColors.popoverForeground,
+      );
+      expect(document.documentElement.style.getPropertyValue('--secondary')).toBe(
+        mockColors.secondary,
+      );
+      expect(document.documentElement.style.getPropertyValue('--secondary-foreground')).toBe(
+        mockColors.secondaryForeground,
+      );
       expect(document.documentElement.style.getPropertyValue('--muted')).toBe(mockColors.muted);
-      expect(document.documentElement.style.getPropertyValue('--muted-foreground')).toBe(mockColors.mutedForeground);
+      expect(document.documentElement.style.getPropertyValue('--muted-foreground')).toBe(
+        mockColors.mutedForeground,
+      );
       expect(document.documentElement.style.getPropertyValue('--accent')).toBe(mockColors.accent);
-      expect(document.documentElement.style.getPropertyValue('--accent-foreground')).toBe(mockColors.accentForeground);
-      expect(document.documentElement.style.getPropertyValue('--destructive')).toBe(mockColors.destructive);
-      expect(document.documentElement.style.getPropertyValue('--destructive-foreground')).toBe(mockColors.destructiveForeground);
+      expect(document.documentElement.style.getPropertyValue('--accent-foreground')).toBe(
+        mockColors.accentForeground,
+      );
+      expect(document.documentElement.style.getPropertyValue('--destructive')).toBe(
+        mockColors.destructive,
+      );
+      expect(document.documentElement.style.getPropertyValue('--destructive-foreground')).toBe(
+        mockColors.destructiveForeground,
+      );
       expect(document.documentElement.style.getPropertyValue('--border')).toBe(mockColors.border);
       expect(document.documentElement.style.getPropertyValue('--input')).toBe(mockColors.input);
       expect(document.documentElement.style.getPropertyValue('--ring')).toBe(mockColors.ring);
@@ -315,7 +337,9 @@ describe('theme utilities', () => {
       applyTheme(mockTheme, 'light');
 
       expect(document.documentElement.classList.contains('dark')).toBe(false);
-      expect(document.documentElement.style.getPropertyValue('--background')).toBe(mockTheme.light.background);
+      expect(document.documentElement.style.getPropertyValue('--background')).toBe(
+        mockTheme.light.background,
+      );
       expect(document.documentElement.style.getPropertyValue('--radius')).toBe(mockTheme.radius);
     });
 
@@ -323,7 +347,9 @@ describe('theme utilities', () => {
       applyTheme(mockTheme, 'dark');
 
       expect(document.documentElement.classList.contains('dark')).toBe(true);
-      expect(document.documentElement.style.getPropertyValue('--background')).toBe(mockTheme.dark.background);
+      expect(document.documentElement.style.getPropertyValue('--background')).toBe(
+        mockTheme.dark.background,
+      );
       expect(document.documentElement.style.getPropertyValue('--radius')).toBe(mockTheme.radius);
     });
 
@@ -335,7 +361,9 @@ describe('theme utilities', () => {
 
       applyTheme(lightOnlyTheme, 'dark');
 
-      expect(document.documentElement.style.getPropertyValue('--background')).toBe(mockTheme.light.background);
+      expect(document.documentElement.style.getPropertyValue('--background')).toBe(
+        mockTheme.light.background,
+      );
     });
 
     it('should work without radius', () => {
@@ -346,7 +374,9 @@ describe('theme utilities', () => {
 
       applyTheme(themeWithoutRadius, 'light');
 
-      expect(document.documentElement.style.getPropertyValue('--background')).toBe(mockTheme.light.background);
+      expect(document.documentElement.style.getPropertyValue('--background')).toBe(
+        mockTheme.light.background,
+      );
     });
   });
 
@@ -361,7 +391,9 @@ describe('theme utilities', () => {
 
       const defaultTheme = getDefaultTheme();
       expect(document.documentElement.classList.contains('dark')).toBe(false);
-      expect(document.documentElement.style.getPropertyValue('--background')).toBe(defaultTheme.light.background);
+      expect(document.documentElement.style.getPropertyValue('--background')).toBe(
+        defaultTheme.light.background,
+      );
       expect(document.documentElement.style.getPropertyValue('--radius')).toBe(defaultTheme.radius);
     });
 
@@ -370,7 +402,9 @@ describe('theme utilities', () => {
 
       const defaultTheme = getDefaultTheme();
       expect(document.documentElement.classList.contains('dark')).toBe(true);
-      expect(document.documentElement.style.getPropertyValue('--background')).toBe(defaultTheme.dark?.background);
+      expect(document.documentElement.style.getPropertyValue('--background')).toBe(
+        defaultTheme.dark?.background,
+      );
       expect(document.documentElement.style.getPropertyValue('--radius')).toBe(defaultTheme.radius);
     });
   });
