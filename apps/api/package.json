@@ -51,7 +51,7 @@
         "@opentelemetry/instrumentation-nestjs-core": "^0.55.0",
         "@opentelemetry/resources": "^2.2.0",
         "@opentelemetry/sdk-trace-base": "^2.2.0",
-        "@opentelemetry/sdk-trace-node": "^2.2.0",
+        "@opentelemetry/sdk-trace-node": "^2.4.0",
         "@opentelemetry/semantic-conventions": "^1.38.0",
         "@scaffold/types": "workspace:*",
         "@sentry/node": "^10.32.1",
