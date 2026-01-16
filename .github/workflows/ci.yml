@@ -167,7 +167,7 @@ jobs:
         run: pnpm --filter @scaffold/api test:cov
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           files: ./apps/api/coverage/lcov.info
           flags: api
@@ -201,7 +201,7 @@ jobs:
         run: pnpm --filter @scaffold/web test:coverage
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           files: ./apps/web/coverage/lcov.info
           flags: web
